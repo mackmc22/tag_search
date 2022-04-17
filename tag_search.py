@@ -1,17 +1,23 @@
 def tag_search(q, tags):
 
-    for tag in tags:
-        if tag['item'] == q:
-            return tag
+    matches = []
 
-    return None
+    for tag in tags:
+
+        if q in tag['item']:
+            matches.append(tag)
+
+    return matches
+
 
 
 
 tags = [
     {'item': 'oranges'},
     {'item': 'apples'},
+    {'item': 'appliances'}
 ]
+'''
 result = tag_search('apples', tags)
 assert result['item'] == 'apples'
 
@@ -20,3 +26,12 @@ assert result['item'] == 'oranges'
 
 result = tag_search('doesnt exist', [])
 assert result == None
+'''
+results = tag_search("app", tags)
+assert len(results) == 2
+
+results = tag_search("es", tags)
+assert len(results) == 3
+
+results = tag_search("poop", tags)
+assert len(results) == 0
